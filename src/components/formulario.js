@@ -1,6 +1,6 @@
 import React from "react";
 
-const formulario = () => {
+const Formulario = () => {
   return (
     <form className="col-4 ml-auto mr-auto mb-5">
       <div className="form-group">
@@ -17,4 +17,4 @@ const formulario = () => {
   );
 };
 
-export default formulario;
+export default Formulario;
