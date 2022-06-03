@@ -1,7 +1,7 @@
 import React from "react";
-import tareas from "../utils/tareas";
 
-const listaTareas = () => {
+
+const listaTareas = ({listaTareas}) => {
   const botonIncompleta = (
     <button className="btn btn-primary mr-2">Marcar incompleta</button>
   );
@@ -15,7 +15,7 @@ const listaTareas = () => {
 
   return (
     <div className="row">
-      {tareas.map((tarea) => (
+      {listaTareas.map((tarea) => (
         <div className="col-4 mb-4">
           <div className="card" key={tarea.id}>
             <div className="card-body">
