@@ -13,7 +13,7 @@ const Formulario = ({handleRegister}) => {
     <form className="col-4 ml-auto mr-auto mb-5">
       <div className="form-group">
         <label>Título de la tarea</label>
-        <input type="text" className="form-control" onChange={(e) => setTitulo(e.target.value)}/>
+        <input type="text" className="form-control" value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
         <small className="form-text text-muted">
           Escriba la tarea que desee registrar
         </small>

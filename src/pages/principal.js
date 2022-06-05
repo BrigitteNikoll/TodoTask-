@@ -22,6 +22,7 @@ const Principal = () => {
       { id: ultimoId + 1, titulo: tarea, completado: false },
     ]);
   };
+
   return (
     <>
       <div className="container">
