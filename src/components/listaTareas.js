@@ -1,6 +1,6 @@
 import React from "react";
 
-const listaTareas = ({ listaTareas, handleToggle }) => {
+const listaTareas = ({ listaTareas, handleToggle, handleEliminar }) => {
   const botonIncompleta = (id) => (
     <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
       Marcar incompleta
@@ -14,7 +14,12 @@ const listaTareas = ({ listaTareas, handleToggle }) => {
   );
 
   const botonEditar = <button className="btn btn-warning">Editar</button>;
-  const botonEliminar = <button className="btn btn-danger">Eliminar</button>;
+  
+  const botonEliminar = (id) => (
+    <button className="btn btn-danger" onClick={() => handleEliminar(id)}>
+      Eliminar
+    </button>
+  );
 
   return (
     <div className="row">
@@ -29,7 +34,7 @@ const listaTareas = ({ listaTareas, handleToggle }) => {
               {tarea.completado
                 ? botonIncompleta(tarea.id)
                 : botonCompleta(tarea.id)}
-              {tarea.completado ? botonEliminar : botonEditar}
+              {tarea.completado ? botonEliminar(tarea.id) : botonEditar}
             </div>
           </div>
         </div>

@@ -25,17 +25,29 @@ const Principal = () => {
 
   //Función para cambiar el estado de una tarea
   const handleToggle = (id) => {
-    const nuevaTarea = listaTareas.map((tarea) => 
-      tarea.id === id ? {...tarea, completado: !tarea.completado} : tarea
-    )
+    const nuevaTarea = listaTareas.map((tarea) =>
+      tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
+    );
     setListaTareas(nuevaTarea);
-  }
+  };
+
+  //Función para eliminar una tarea
+  const handleEliminar = (id) => {
+    const getId = listaTareas
+      .map((tarea) => (tarea.id === id ? null : tarea))
+      .filter((tarea) => tarea != null);
+    setListaTareas(getId);
+  };
   return (
     <>
       <div className="container">
         <h1 className="text-center mt-5 mb-5">Lista de tareas</h1>
         <Formulario handleRegister={handleRegister} />
-        <ListaTareas listaTareas={listaTareas} handleToggle={handleToggle}/>
+        <ListaTareas
+          listaTareas={listaTareas}
+          handleToggle={handleToggle}
+          handleEliminar={handleEliminar}
+        />
       </div>
     </>
   );
