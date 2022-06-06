@@ -23,12 +23,19 @@ const Principal = () => {
     ]);
   };
 
+  //Función para cambiar el estado de una tarea
+  const handleToggle = (id) => {
+    const nuevaTarea = listaTareas.map((tarea) => 
+      tarea.id === id ? {...tarea, completado: !tarea.completado} : tarea
+    )
+    setListaTareas(nuevaTarea);
+  }
   return (
     <>
       <div className="container">
         <h1 className="text-center mt-5 mb-5">Lista de tareas</h1>
         <Formulario handleRegister={handleRegister} />
-        <ListaTareas listaTareas={listaTareas} />
+        <ListaTareas listaTareas={listaTareas} handleToggle={handleToggle}/>
       </div>
     </>
   );

@@ -1,13 +1,16 @@
 import React from "react";
 
-
-const listaTareas = ({listaTareas}) => {
-  const botonIncompleta = (
-    <button className="btn btn-primary mr-2">Marcar incompleta</button>
+const listaTareas = ({ listaTareas, handleToggle }) => {
+  const botonIncompleta = (id) => (
+    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+      Marcar incompleta
+    </button>
   );
 
-  const botonCompleta = (
-    <button className="btn btn-primary mr-2">Marcar completada</button>
+  const botonCompleta = (id) => (
+    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+      Marcar completada
+    </button>
   );
 
   const botonEditar = <button className="btn btn-warning">Editar</button>;
@@ -23,7 +26,9 @@ const listaTareas = ({listaTareas}) => {
               <p className="card-text">
                 {tarea.competado ? "Tarea completada" : "Tarea incompleta"}
               </p>
-              {tarea.completado ? botonIncompleta : botonCompleta}
+              {tarea.completado
+                ? botonIncompleta(tarea.id)
+                : botonCompleta(tarea.id)}
               {tarea.completado ? botonEliminar : botonEditar}
             </div>
           </div>

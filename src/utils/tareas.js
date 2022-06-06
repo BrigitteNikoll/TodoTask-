@@ -2,7 +2,7 @@ const tareas = [
     {
       id: 1,
       titulo: "Comprar leche",
-      completado: false,
+      completado: true,
     },
     {
       id: 2,
