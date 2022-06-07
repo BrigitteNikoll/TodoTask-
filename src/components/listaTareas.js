@@ -7,13 +7,13 @@ const listaTareas = ({
   recibirEditable,
 }) => {
   const botonIncompleta = (id) => (
-    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+    <button className="btn btn-success mr-2" onClick={() => handleToggle(id)}>
       Marcar incompleta
     </button>
   );
 
   const botonCompleta = (id) => (
-    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+    <button className="btn btn-secondary mr-2" onClick={() => handleToggle(id)}>
       Marcar completada
     </button>
   );
