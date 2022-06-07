@@ -6,6 +6,7 @@ import tareas from "../utils/tareas";
 const Principal = () => {
   //Estados del componente
   const [listaTareas, setListaTareas] = useState([]);
+  const [editable, setEditable] = useState(null);
 
   //Ciclo de vida con useEffect
   useEffect(() => {
@@ -17,36 +18,62 @@ const Principal = () => {
     console.log("Agregando tarea");
     const ultimoId = listaTareas[listaTareas.length - 1].id;
 
-    setListaTareas([
-      ...listaTareas,
+    setListaTareas((estadoPrevio) => [
+      ...estadoPrevio,
       { id: ultimoId + 1, titulo: tarea, completado: false },
     ]);
   };
 
   //Función para cambiar el estado de una tarea
   const handleToggle = (id) => {
-    const nuevaTarea = listaTareas.map((tarea) =>
+    const nuevaLista = listaTareas.map((tarea) =>
       tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
     );
-    setListaTareas(nuevaTarea);
+    setListaTareas(nuevaLista);
   };
 
   //Función para eliminar una tarea
   const handleEliminar = (id) => {
-    const getId = listaTareas
+    const nuevaLista = listaTareas
       .map((tarea) => (tarea.id === id ? null : tarea))
       .filter((tarea) => tarea != null);
-    setListaTareas(getId);
+    setListaTareas(nuevaLista);
   };
+
+  //Función para recibir la tarea que se va a editar
+  const recibirEditable = (tarea) => {
+    setEditable(tarea);
+  };
+
+  //Función para editar una tarea
+  const handleEditar = (nuevaTarea) => {
+    const nuevaLista = listaTareas.map((tarea) =>
+      tarea.id === nuevaTarea.id
+        ? {
+            id: nuevaTarea.id,
+            titulo: nuevaTarea.titulo,
+            completado: nuevaTarea.completado,
+          }
+        : tarea
+    );
+    setListaTareas(nuevaLista);
+    setEditable(nuevaLista);
+  };
+
   return (
     <>
       <div className="container">
         <h1 className="text-center mt-5 mb-5">Lista de tareas</h1>
-        <Formulario handleRegister={handleRegister} />
+        <Formulario
+          handleRegister={handleRegister}
+          editable={editable}
+          handleEditar={handleEditar}
+        />
         <ListaTareas
           listaTareas={listaTareas}
           handleToggle={handleToggle}
           handleEliminar={handleEliminar}
+          recibirEditable={recibirEditable}
         />
       </div>
     </>

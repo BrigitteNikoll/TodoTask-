@@ -1,6 +1,11 @@
 import React from "react";
 
-const listaTareas = ({ listaTareas, handleToggle, handleEliminar }) => {
+const listaTareas = ({
+  listaTareas,
+  handleToggle,
+  handleEliminar,
+  recibirEditable,
+}) => {
   const botonIncompleta = (id) => (
     <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
       Marcar incompleta
@@ -13,8 +18,12 @@ const listaTareas = ({ listaTareas, handleToggle, handleEliminar }) => {
     </button>
   );
 
-  const botonEditar = <button className="btn btn-warning">Editar</button>;
-  
+  const botonEditar = (tarea) => (
+    <button className="btn btn-warning" onClick={() => recibirEditable(tarea)}>
+      Editar
+    </button>
+  );
+
   const botonEliminar = (id) => (
     <button className="btn btn-danger" onClick={() => handleEliminar(id)}>
       Eliminar
@@ -29,12 +38,12 @@ const listaTareas = ({ listaTareas, handleToggle, handleEliminar }) => {
             <div className="card-body">
               <h5 className="card-title">{tarea.titulo}</h5>
               <p className="card-text">
-                {tarea.competado ? "Tarea completada" : "Tarea incompleta"}
+                {tarea.completado ? "Tarea completada" : "Tarea incompleta"}
               </p>
               {tarea.completado
                 ? botonIncompleta(tarea.id)
                 : botonCompleta(tarea.id)}
-              {tarea.completado ? botonEliminar(tarea.id) : botonEditar}
+              {tarea.completado ? botonEliminar(tarea.id) : botonEditar(tarea)}
             </div>
           </div>
         </div>
