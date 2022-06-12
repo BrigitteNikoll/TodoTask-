@@ -5,16 +5,26 @@ import tareas from "../utils/tareas";
 
 const ACTIONS = {
   CARGAR_TAREAS: "cargar-tareas",
+  REGISTRAR_TAREA: "registrar-tarea",
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.CARGAR_TAREAS:
       return tareas;
-
+    case ACTIONS.REGISTRAR_TAREA:
+      return [...state, crearTarea(action.payload.titulo)];
     default:
       return state;
   }
+}
+
+function crearTarea(titulo) {
+  return {
+    id: Math.floor(Math.random * 100),
+    titulo,
+    completado: false
+  };
 }
 
 const Principal = () => {
@@ -29,14 +39,8 @@ const Principal = () => {
   }, []);
 
   //Función para agregar una nueva tarea
-  const handleRegister = (tarea) => {
-    console.log("Agregando tarea");
-    const ultimoId = listaTareas[listaTareas.length - 1].id;
-
-    setListaTareas((estadoPrevio) => [
-      ...estadoPrevio,
-      { id: ultimoId + 1, titulo: tarea, completado: false },
-    ]);
+  const handleRegister = (titulo) => {
+    dispatch({type: ACTIONS.REGISTRAR_TAREA, payload: {titulo}})
   };
 
   //Función para cambiar el estado de una tarea
