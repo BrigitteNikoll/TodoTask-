@@ -1,16 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Formulario from "../components/formulario";
 import ListaTareas from "../components/listaTareas";
 import tareas from "../utils/tareas";
 
+const ACTIONS = {
+  CARGAR_TAREAS: "cargar-tareas",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.CARGAR_TAREAS:
+      return tareas;
+
+    default:
+      return state;
+  }
+}
+
 const Principal = () => {
   //Estados del componente
   const [listaTareas, setListaTareas] = useState([]);
+  const [state, dispatch] = useReducer(reducer, []);
   const [editable, setEditable] = useState(null);
 
   //Ciclo de vida con useEffect
   useEffect(() => {
-    setListaTareas(tareas);
+    dispatch({ type: ACTIONS.CARGAR_TAREAS });
   }, []);
 
   //Función para agregar una nueva tarea
@@ -70,7 +85,7 @@ const Principal = () => {
           handleEditar={handleEditar}
         />
         <ListaTareas
-          listaTareas={listaTareas}
+          listaTareas={state}
           handleToggle={handleToggle}
           handleEliminar={handleEliminar}
           recibirEditable={recibirEditable}
