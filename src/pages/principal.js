@@ -8,7 +8,7 @@ const ACTIONS = {
   REGISTRAR_TAREA: "registrar-tarea",
   TOOGLE_TAREA: "toogle-tarea",
   DELETE_TAREA: "delete-tarea",
-  EDITAR_TAREA: "update-tarea",
+  UPDATE_TAREA: "update-tarea",
 };
 
 function reducer(state, action) {
@@ -21,7 +21,7 @@ function reducer(state, action) {
       return toogle(state, action.payload.id);
     case ACTIONS.DELETE_TAREA:
       return deleteTask(state, action.payload.id);
-      case ACTIONS.EDITAR_TAREA:
+      case ACTIONS.UPDATE_TAREA:
         return editarTodo(state, action.payload.nuevaTarea);
     default:
       return state;
@@ -93,7 +93,7 @@ const Principal = () => {
 
   //Función para editar una tarea
   const handleEditar = (nuevaTarea) => {
-    dispatch({ type: ACTIONS.EDITAR_TAREA, payload: { nuevaTarea } });
+    dispatch({ type: ACTIONS.UPDATE_TAREA, payload: { nuevaTarea } });
     setEditable(null);
   };
 
