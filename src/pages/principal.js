@@ -6,6 +6,7 @@ import tareas from "../utils/tareas";
 const ACTIONS = {
   CARGAR_TAREAS: "cargar-tareas",
   REGISTRAR_TAREA: "registrar-tarea",
+  TOOGLE_TAREA: "toogle-tarea",
 };
 
 function reducer(state, action) {
@@ -14,19 +15,25 @@ function reducer(state, action) {
       return tareas;
     case ACTIONS.REGISTRAR_TAREA:
       return [...state, crearTarea(action.payload.titulo)];
+    case ACTIONS.TOOGLE_TAREA:
+      return toogle(state, action.payload.id);
     default:
       return state;
   }
 }
 
-//ESTA ES UNA PRUEBA PARA VER SI SE ESTÁN SUBIENDO LOS COMMITS x2
-
 function crearTarea(titulo) {
   return {
     id: Math.random(4, 1000),
     titulo,
-    completado: false
+    completado: false,
   };
+}
+
+function toogle(state, id) {
+  return state.map((tarea) =>
+    tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
+  );
 }
 
 const Principal = () => {
@@ -42,15 +49,16 @@ const Principal = () => {
 
   //Función para agregar una nueva tarea
   const handleRegister = (titulo) => {
-    dispatch({type: ACTIONS.REGISTRAR_TAREA, payload: {titulo}})
+    dispatch({ type: ACTIONS.REGISTRAR_TAREA, payload: { titulo } });
   };
 
   //Función para cambiar el estado de una tarea
   const handleToggle = (id) => {
-    const nuevaLista = listaTareas.map((tarea) =>
+    /* const nuevaLista = listaTareas.map((tarea) =>
       tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
     );
-    setListaTareas(nuevaLista);
+    setListaTareas(nuevaLista); */
+    dispatch({ type: ACTIONS.TOOGLE_TAREA, payload: { id } });
   };
 
   //Función para eliminar una tarea
