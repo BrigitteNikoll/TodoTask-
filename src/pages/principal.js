@@ -7,6 +7,7 @@ const ACTIONS = {
   CARGAR_TAREAS: "cargar-tareas",
   REGISTRAR_TAREA: "registrar-tarea",
   TOOGLE_TAREA: "toogle-tarea",
+  DELETE_TAREA: "delete-tarea",
 };
 
 function reducer(state, action) {
@@ -17,6 +18,8 @@ function reducer(state, action) {
       return [...state, crearTarea(action.payload.titulo)];
     case ACTIONS.TOOGLE_TAREA:
       return toogle(state, action.payload.id);
+    case ACTIONS.DELETE_TAREA:
+      return deleteTask(state, action.payload.id);
     default:
       return state;
   }
@@ -34,6 +37,12 @@ function toogle(state, id) {
   return state.map((tarea) =>
     tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
   );
+}
+
+function deleteTask(state, id) {
+  return state
+    .map((tarea) => (tarea.id === id ? null : tarea))
+    .filter((tarea) => tarea != null);
 }
 
 const Principal = () => {
@@ -54,19 +63,12 @@ const Principal = () => {
 
   //Función para cambiar el estado de una tarea
   const handleToggle = (id) => {
-    /* const nuevaLista = listaTareas.map((tarea) =>
-      tarea.id === id ? { ...tarea, completado: !tarea.completado } : tarea
-    );
-    setListaTareas(nuevaLista); */
     dispatch({ type: ACTIONS.TOOGLE_TAREA, payload: { id } });
   };
 
   //Función para eliminar una tarea
   const handleEliminar = (id) => {
-    const nuevaLista = listaTareas
-      .map((tarea) => (tarea.id === id ? null : tarea))
-      .filter((tarea) => tarea != null);
-    setListaTareas(nuevaLista);
+    dispatch({ type: ACTIONS.DELETE_TAREA, payload: { id } });
   };
 
   //Función para recibir la tarea que se va a editar
