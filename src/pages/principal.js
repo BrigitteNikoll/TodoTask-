@@ -19,7 +19,7 @@ function reducer(state, action) {
   }
 }
 
-//ESTA ES UNA PRUEBA PARA VER SI SE ESTÁN SUBIENDO LOS COMMITS
+//ESTA ES UNA PRUEBA PARA VER SI SE ESTÁN SUBIENDO LOS COMMITS x2
 
 function crearTarea(titulo) {
   return {
