@@ -21,7 +21,7 @@ function reducer(state, action) {
 
 function crearTarea(titulo) {
   return {
-    id: Math.floor(Math.random * 100),
+    id: Math.random(4, 1000),
     titulo,
     completado: false
   };
