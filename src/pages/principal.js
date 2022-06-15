@@ -19,6 +19,8 @@ function reducer(state, action) {
   }
 }
 
+//ESTA ES UNA PRUEBA PARA VER SI SE ESTÁN SUBIENDO LOS COMMITS
+
 function crearTarea(titulo) {
   return {
     id: Math.random(4, 1000),
