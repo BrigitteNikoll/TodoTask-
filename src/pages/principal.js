@@ -8,6 +8,7 @@ const ACTIONS = {
   REGISTRAR_TAREA: "registrar-tarea",
   TOOGLE_TAREA: "toogle-tarea",
   DELETE_TAREA: "delete-tarea",
+  EDITAR_TAREA: "update-tarea",
 };
 
 function reducer(state, action) {
@@ -20,6 +21,8 @@ function reducer(state, action) {
       return toogle(state, action.payload.id);
     case ACTIONS.DELETE_TAREA:
       return deleteTask(state, action.payload.id);
+      case ACTIONS.EDITAR_TAREA:
+        return editarTodo(state, action.payload.nuevaTarea);
     default:
       return state;
   }
@@ -45,9 +48,21 @@ function deleteTask(state, id) {
     .filter((tarea) => tarea != null);
 }
 
+function editarTodo(state, nuevaTarea) {
+  return state.map((tarea) =>
+    tarea.id === nuevaTarea.id
+      ? {
+          id: nuevaTarea.id,
+          titulo: nuevaTarea.titulo,
+          completado: nuevaTarea.completado,
+        }
+      : tarea
+  );
+}
+
 const Principal = () => {
   //Estados del componente
-  const [listaTareas, setListaTareas] = useState([]);
+  /* const [listaTareas, setListaTareas] = useState([]); */
   const [state, dispatch] = useReducer(reducer, []);
   const [editable, setEditable] = useState(null);
 
@@ -78,17 +93,8 @@ const Principal = () => {
 
   //Función para editar una tarea
   const handleEditar = (nuevaTarea) => {
-    const nuevaLista = listaTareas.map((tarea) =>
-      tarea.id === nuevaTarea.id
-        ? {
-            id: nuevaTarea.id,
-            titulo: nuevaTarea.titulo,
-            completado: nuevaTarea.completado,
-          }
-        : tarea
-    );
-    setListaTareas(nuevaLista);
-    setEditable(nuevaLista);
+    dispatch({ type: ACTIONS.EDITAR_TAREA, payload: { nuevaTarea } });
+    setEditable(null);
   };
 
   return (
