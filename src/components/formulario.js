@@ -31,7 +31,7 @@ const Formulario = ({
   return (
     <form className="col-4 ml-auto mr-auto mb-5">
       <div className="form-group">
-        <label>Título de la tarea</label>
+        <label>Nombre de la tarea</label>
         <input
           type="text"
           className="form-control"
