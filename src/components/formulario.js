@@ -39,7 +39,7 @@ const Formulario = ({
           onChange={(e) => setTitulo(e.target.value)}
         />
         <small className="form-text text-muted">
-          Escriba la tarea que desee registrar
+          Escribe la tarea que desee registrar
         </small>
       </div>
       <button
